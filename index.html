@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZOPHAN AI Automation — Where Faith and Tech Meet</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --purple:#DF73FF;
+  --purple2:#c040f0;
+  --silver:linear-gradient(180deg,#fff 0%,#C0C0C0 40%,#707070 60%,#C0C0C0 100%);
+  --dark:#050508;
+  --dark2:#0c0c14;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:#e0e0e0;font-family:'Space Grotesk',sans-serif;overflow-x:hidden;}
+
+/* ANIMATIONS */
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+@keyframes glow{0%,100%{box-shadow:0 0 5px rgba(223,115,255,0.2)}50%{box-shadow:0 0 20px rgba(223,115,255,0.5)}}
+@keyndef fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* SILVER TEXT */
+.silver-text{background:linear-gradient(180deg,#fff 0%,#C0C0C0 40%,#707070 60%,#C0C0C0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.purple-text{background:linear-gradient(135deg,#DF73FF,#c040f0,#DF73FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* GEO BACKGROUND */
+.geo-bg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2rem;border-bottom:1px solid rgba(223,115,255,0.2);position:sticky;top:0;z-index:100;background:rgba(5,5,8,0.97);backdrop-filter:blur(10px);}
+.logo{display:flex;align-items:center;gap:8px;cursor:pointer;text-decoration:none;}
+.logo-text{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.15em;background:linear-gradient(180deg,#fff 0%,#C0C0C0 40%,#707070 60%,#C0C0C0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo-text span{background:linear-gradient(135deg,#DF73FF,#c040f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:1.2rem;list-style:none;}
+.nav-links a{text-decoration:none;font-size:10px;color:#666;transition:color 0.2s;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+.nav-links a:hover{color:#DF73FF;}
+.nav-links .free-res a{color:rgba(223,115,255,0.7);border:1px solid rgba(223,115,255,0.25);padding:3px 8px;border-radius:2px;transition:all 0.2s;}
+.nav-links .free-res a:hover{color:#DF73FF;border-color:#DF73FF;background:rgba(223,115,255,0.05);}
+.nav-btn{background:transparent;color:#DF73FF;border:1px solid #DF73FF;padding:7px 18px;font-family:'Orbitron',sans-serif;font-size:10px;cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;clip-path:polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px);transition:all 0.2s;}
+.nav-btn:hover{background:#DF73FF;color:#050508;}
+
+/* PAGES */
+.page{display:none;position:relative;z-index:2;}
+.page.active{display:block;}
+
+/* HERO */
+.hero{padding:5rem 2rem 4rem;border-bottom:1px solid rgba(223,115,255,0.1);}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(223,115,255,0.6);padding:5px 14px;font-size:9px;color:#DF73FF;margin-bottom:2rem;letter-spacing:0.2em;text-transform:uppercase;font-family:'Orbitron',sans-serif;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);}
+.hero-badge .dot{width:5px;height:5px;background:#DF73FF;border-radius:50%;animation:pulse 2s infinite;}
+.hero-layout{display:grid;grid-template-columns:1fr 210px;gap:2rem;align-items:start;}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.0;letter-spacing:0.04em;background:linear-gradient(180deg,#fff 0%,#C0C0C0 40%,#707070 60%,#C0C0C0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.8rem;text-transform:uppercase;}
+.hero h1 .hl{background:linear-gradient(135deg,#DF73FF,#c040f0,#DF73FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tagline-sub{font-size:12px;color:#DF73FF;font-style:italic;letter-spacing:0.05em;margin-bottom:1.5rem;font-weight:300;}
+.hero-sub{font-size:13px;color:#888;max-width:420px;line-height:1.9;margin-bottom:2rem;font-weight:300;}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-main{background:#DF73FF;color:#050508;border:none;padding:12px 28px;font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;cursor:pointer;letter-spacing:0.12em;text-transform:uppercase;clip-path:polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px);transition:opacity 0.2s;animation:glow 3s infinite;}
+.btn-main:hover{opacity:0.85;}
+.btn-outline{background:transparent;color:#C0C0C0;border:1px solid rgba(192,192,192,0.3);padding:12px 28px;font-family:'Space Grotesk',sans-serif;font-size:12px;cursor:pointer;transition:all 0.2s;}
+.btn-outline:hover{border-color:#DF73FF;color:#DF73FF;}
+.hero-panel{border:1px solid rgba(223,115,255,0.25);padding:1.5rem;background:rgba(223,115,255,0.04);clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));animation:glow 4s infinite;}
+.panel-label{font-family:'Orbitron',sans-serif;font-size:8px;color:#DF73FF;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;opacity:0.8;}
+.panel-stat{margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.05);}
+.panel-stat:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.panel-num{font-family:'Orbitron',sans-serif;font-size:1.7rem;font-weight:700;background:linear-gradient(180deg,#fff,#C0C0C0,#808080,#C0C0C0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.panel-num span{background:linear-gradient(135deg,#DF73FF,#c040f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:1rem;}
+.panel-desc{font-size:10px;color:#555;margin-top:3px;}
+
+/* TRUST BAR */
+.trust-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(223,115,255,0.15);border-bottom:1px solid rgba(223,115,255,0.1);}
+.trust-item{background:#050508;padding:1.2rem;text-align:center;transition:background 0.2s;}
+.trust-item:hover{background:rgba(223,115,255,0.04);}
+.trust-num{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:700;background:linear-gradient(180deg,#fff,#C0C0C0,#808080,#C0C0C0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.trust-num span{background:linear-gradient(135deg,#DF73FF,#c040f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.trust-label{font-size:9px;color:#555;letter-spacing:0.1em;text-transform:uppercase;margin-top:3px;font-family:'Orbitron',sans-serif;}
+
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(223,115,255,0.5),transparent);}
+
+/* PROBLEM SECTION */
+.problem-section{padding:3.5rem 2rem;border-bottom:1px solid rgba(255,255,255,0.04);background:rgba(223,115,255,0.02);}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
+.problem-list,.solution-list{list-style:none;}
+.problem-list li,.solution-list li{font-size:13px;color:#888;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;gap:10px;font-weight:300;}
+.problem-list li::before{content:'✗';color:rgba(223,115,255,0.4);font-size:14px;flex-shrink:0;}
+.solution-list li{transition:color 0.2s;}
+.solution-list li:hover{color:#C0C0C0;}
+.solution-list li::before{content:'✓';color:#DF73FF;font-size:14px;flex-shrink:0;}
+
+/* SHARED SECTION */
+.section{padding:3.5rem 2rem;border-bottom:1px solid rgba(255,255,255,0.04);}
+.stag{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:#DF73FF;margin-bottom:0.8rem;font-family:'Orbitron',sans-serif;opacity:0.8;}
+.stitle{font-family:'Orbitron',sans-serif;font-size:clamp(1.3rem,3.5vw,2rem);font-weight:700;background:linear-gradient(180deg,#fff 0%,#C0C0C0 40%,#707070 60%,#C0C0C0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:0.04em;line-height:1.1;margin-bottom:0.8rem;}
+.ssub{font-size:13px;color:#888;line-height:1.8;max-width:520px;margin-bottom:2.5rem;font-weight:300;}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;}
+.svc{border:1px solid rgba(223,115,255,0.18);padding:1.6rem;background:rgba(223,115,255,0.02);position:relative;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);transition:all 0.25s;cursor:default;}
+.svc:hover{background:rgba(223,115,255,0.07);border-color:rgba(223,115,255,0.4);transform:translateY(-2px);}
+.svc::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 12px 12px 0;border-color:transparent rgba(223,115,255,0.5) transparent transparent;}
+.svc-icon{font-size:22px;margin-bottom:1rem;}
+.svc-name{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;background:linear-gradient(180deg,#fff,#C0C0C0,#909090);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:0.08em;margin-bottom:8px;text-transform:uppercase;}
+.svc-desc{font-size:12px;color:#888;line-height:1.6;font-weight:300;}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:rgba(223,115,255,0.1);margin-top:2rem;}
+.step{background:#050508;padding:1.6rem;border-left:2px solid transparent;transition:all 0.2s;}
+.step:hover{border-left-color:#DF73FF;background:rgba(223,115,255,0.03);}
+.step-n{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;color:rgba(223,115,255,0.18);line-height:1;margin-bottom:0.5rem;}
+.step-t{font-size:11px;font-weight:600;color:#C0C0C0;margin-bottom:6px;letter-spacing:0.05em;}
+.step-d{font-size:12px;color:#777;line-height:1.5;font-weight:300;}
+
+/* TESTIMONIALS */
+.test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+.test-card{border:1px solid rgba(223,115,255,0.12);padding:1.5rem;background:rgba(223,115,255,0.02);position:relative;transition:all 0.2s;}
+.test-card:hover{border-color:rgba(223,115,255,0.3);background:rgba(223,115,255,0.04);}
+.test-quote{position:absolute;top:8px;left:14px;font-size:3rem;color:rgba(223,115,255,0.08);font-family:serif;line-height:1;}
+.test-text{font-size:12px;color:#777;line-height:1.8;font-style:italic;margin-bottom:1rem;padding-top:1rem;}
+.test-author{font-size:10px;color:#C0C0C0;letter-spacing:0.05em;}
+.test-biz{font-size:9px;color:#555;margin-top:2px;}
+
+/* FOUNDER */
+.founder-layout{display:grid;grid-template-columns:170px 1fr;gap:2.5rem;align-items:start;}
+.founder-photo{border:1px solid rgba(223,115,255,0.2);background:rgba(223,115,255,0.04);aspect-ratio:1;display:flex;align-items:center;justify-content:center;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%);position:relative;animation:glow 4s infinite;}
+.founder-photo::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 16px 16px 0;border-color:transparent rgba(223,115,255,0.4) transparent transparent;}
+.founder-placeholder{text-align:center;}
+.founder-placeholder .icon{font-size:3rem;color:rgba(223,115,255,0.2);margin-bottom:0.5rem;}
+.founder-placeholder p{font-size:8px;color:#555;letter-spacing:0.1em;text-transform:uppercase;font-family:'Orbitron',sans-serif;}
+.founder-name{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:700;background:linear-gradient(180deg,#fff,#C0C0C0,#909090);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:0.08em;margin-bottom:4px;}
+.founder-title{font-size:11px;color:#DF73FF;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;font-family:'Orbitron',sans-serif;opacity:0.8;}
+.founder-bio{font-size:13px;color:#888;line-height:1.8;font-weight:300;margin-bottom:0.8rem;}
+.value-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:0.8rem;}
+.value-tag{border:1px solid rgba(223,115,255,0.2);padding:4px 10px;font-size:9px;color:#DF73FF;letter-spacing:0.1em;text-transform:uppercase;font-family:'Orbitron',sans-serif;}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.price-card{border:1px solid rgba(223,115,255,0.15);padding:2rem 1.5rem;background:rgba(223,115,255,0.02);position:relative;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);transition:all 0.2s;}
+.price-card:hover{background:rgba(223,115,255,0.05);transform:translateY(-2px);}
+.price-card.featured{border-color:rgba(223,115,255,0.5);background:rgba(223,115,255,0.06);animation:glow 3s infinite;}
+.price-card.featured::after{content:'MOST POPULAR';position:absolute;top:12px;right:14px;font-family:'Orbitron',sans-serif;font-size:7px;color:#DF73FF;letter-spacing:0.15em;}
+.price-card.custom{border-color:rgba(223,115,255,0.3);background:rgba(223,115,255,0.03);border-style:dashed;}
+.price-card.custom::after{content:'LARGER BUSINESS';position:absolute;top:12px;right:14px;font-family:'Orbitron',sans-serif;font-size:7px;color:rgba(223,115,255,0.6);letter-spacing:0.1em;}
+.price-tier{font-family:'Orbitron',sans-serif;font-size:10px;color:#DF73FF;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.8rem;}
+.price-setup{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;background:linear-gradient(180deg,#fff,#C0C0C0,#808080,#C0C0C0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.price-setup span{font-size:0.9rem;color:#666;}
+.price-monthly{font-size:12px;color:#DF73FF;margin:4px 0 1rem;font-style:italic;}
+.price-features{list-style:none;margin-bottom:1.5rem;}
+.price-features li{font-size:11px;color:#777;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;gap:6px;}
+.price-features li::before{content:'→';color:#DF73FF;font-size:10px;}
+.price-btn{width:100%;background:transparent;color:#DF73FF;border:1px solid rgba(223,115,255,0.4);padding:10px;font-family:'Orbitron',sans-serif;font-size:9px;cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.2s;}
+.price-btn:hover,.price-card.featured .price-btn{background:#DF73FF;color:#050508;}
+.price-note{font-size:12px;color:#555;margin-top:1.5rem;text-align:center;font-style:italic;}
+
+/* DISCLAIMER */
+.disclaimer{border:1px solid rgba(223,115,255,0.15);padding:2rem;background:rgba(223,115,255,0.02);margin-top:1.5rem;position:relative;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);}
+.disclaimer::before{content:'// IMPORTANT NOTE';position:absolute;top:10px;left:16px;font-family:'Orbitron',sans-serif;font-size:8px;color:rgba(223,115,255,0.35);letter-spacing:0.15em;}
+.disclaimer-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:0.5rem;}
+.disclaimer p{font-size:13px;color:#777;line-height:1.8;font-weight:300;}
+.disclaimer strong{color:#C0C0C0;font-weight:500;}
+.size-guide{list-style:none;}
+.size-guide li{font-size:12px;color:#666;padding:5px 0;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.03);}
+.size-guide li .tag{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 7px;border:1px solid rgba(223,115,255,0.2);color:#DF73FF;white-space:nowrap;}
+.size-guide li .tag.green{border-color:rgba(80,200,120,0.3);color:rgba(80,200,120,0.8);}
+.size-guide li .tag.yellow{border-color:rgba(255,200,80,0.3);color:rgba(255,200,80,0.8);}
+.size-guide li .tag.red{border-color:rgba(255,100,80,0.3);color:rgba(255,100,80,0.8);}
+
+/* FREE RESOURCES */
+.resources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:2rem;}
+.resource-card{border:1px solid rgba(223,115,255,0.18);padding:2rem 1.5rem;background:rgba(223,115,255,0.02);position:relative;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);transition:all 0.25s;}
+.resource-card::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 12px 12px 0;border-color:transparent rgba(223,115,255,0.5) transparent transparent;}
+.resource-card.coming-soon{opacity:0.45;pointer-events:none;}
+.coming-badge{position:absolute;top:10px;left:14px;font-size:7px;color:#555;letter-spacing:0.15em;text-transform:uppercase;font-family:'Orbitron',sans-serif;}
+.resource-icon{font-size:2.2rem;margin-bottom:1rem;}
+.resource-tag{font-size:8px;color:#DF73FF;letter-spacing:0.15em;text-transform:uppercase;font-family:'Orbitron',sans-serif;margin-bottom:0.5rem;opacity:0.7;}
+.resource-title{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;background:linear-gradient(180deg,#fff,#C0C0C0,#909090);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:0.05em;margin-bottom:0.8rem;text-transform:uppercase;line-height:1.4;}
+.resource-desc{font-size:12px;color:#888;line-height:1.7;font-weight:300;margin-bottom:1.5rem;}
+.resource-btn{width:100%;background:transparent;color:#DF73FF;border:1px solid rgba(223,115,255,0.3);padding:9px;font-family:'Orbitron',sans-serif;font-size:9px;cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.2s;}
+.resource-btn:hover{background:#DF73FF;color:#050508;}
+
+/* EMAIL CAPTURE */
+.email-capture{border:1px solid rgba(223,115,255,0.25);padding:3rem 2rem;background:rgba(223,115,255,0.04);max-width:520px;margin:2.5rem auto 0;clip-path:polygon(16px 0%,100% 0%,100% calc(100% - 16px),calc(100% - 16px) 100%,0% 100%,0% 16px);position:relative;text-align:center;animation:glow 4s infinite;}
+.email-capture::before{content:'// STAY IN THE LOOP';position:absolute;top:12px;left:16px;font-family:'Orbitron',sans-serif;font-size:8px;color:rgba(223,115,255,0.35);letter-spacing:0.15em;}
+.email-capture h3{font-family:'Orbitron',sans-serif;font-size:1.1rem;background:linear-gradient(180deg,#fff,#C0C0C0,#808080,#C0C0C0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.5rem;margin-top:0.5rem;}
+.email-capture p{font-size:13px;color:#777;margin-bottom:1.5rem;line-height:1.7;}
+.email-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.email-row input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:#C0C0C0;padding:11px 16px;font-size:13px;flex:1;min-width:200px;font-family:'Space Grotesk',sans-serif;outline:none;transition:border-color 0.2s;}
+.email-row input:focus{border-color:rgba(223,115,255,0.4);}
+
+/* CONTACT */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;}
+.contact-item{display:flex;align-items:center;gap:12px;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.04);}
+.contact-icon{width:34px;height:34px;border:1px solid rgba(223,115,255,0.2);display:flex;align-items:center;justify-content:center;color:#DF73FF;font-size:15px;flex-shrink:0;}
+.contact-label{font-size:9px;color:#555;letter-spacing:0.1em;text-transform:uppercase;font-family:'Orbitron',sans-serif;}
+.contact-value{font-size:13px;color:#C0C0C0;margin-top:2px;}
+
+/* FORMS */
+.form-group{margin-bottom:1rem;}
+.form-label{font-size:9px;color:#DF73FF;letter-spacing:0.15em;text-transform:uppercase;font-family:'Orbitron',sans-serif;display:block;margin-bottom:5px;}
+.form-input,.form-select,.form-textarea{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:#C0C0C0;padding:10px 14px;font-size:13px;font-family:'Space Grotesk',sans-serif;outline:none;transition:border-color 0.2s;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(223,115,255,0.4);}
+.form-select option{background:#0d0d14;color:#C0C0C0;}
+.form-textarea{resize:vertical;min-height:80px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-section-title{font-family:'Orbitron',sans-serif;font-size:9px;color:#DF73FF;letter-spacing:0.2em;text-transform:uppercase;margin:1.5rem 0 1rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(223,115,255,0.1);}
+
+/* INTAKE */
+.intake-box{border:1px solid rgba(223,115,255,0.2);padding:2.5rem;background:rgba(223,115,255,0.03);max-width:720px;margin:0 auto;clip-path:polygon(16px 0%,100% 0%,100% calc(100% - 16px),calc(100% - 16px) 100%,0% 100%,0% 16px);position:relative;}
+.intake-box::before{content:'// CLIENT INTAKE FORM';position:absolute;top:12px;left:16px;font-family:'Orbitron',sans-serif;font-size:8px;color:rgba(223,115,255,0.35);letter-spacing:0.15em;}
+
+/* CTA BAND */
+.cta-band{padding:4rem 2rem;text-align:center;}
+.cta-box{border:1px solid rgba(223,115,255,0.25);padding:3rem 2rem;background:rgba(223,115,255,0.04);max-width:520px;margin:0 auto;clip-path:polygon(16px 0%,100% 0%,100% calc(100% - 16px),calc(100% - 16px) 100%,0% 100%,0% 16px);position:relative;animation:glow 4s infinite;}
+.cta-box::before{content:'// READY TO AUTOMATE';position:absolute;top:12px;left:16px;font-family:'Orbitron',sans-serif;font-size:8px;color:rgba(223,115,255,0.35);letter-spacing:0.15em;}
+.cta-box h2{font-family:'Orbitron',sans-serif;font-size:clamp(1.1rem,2.5vw,1.8rem);background:linear-gradient(180deg,#fff,#C0C0C0,#808080,#C0C0C0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:0.05em;margin-bottom:0.5rem;margin-top:1rem;}
+.cta-box h2 span{background:linear-gradient(135deg,#DF73FF,#c040f0,#DF73FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.cta-box p{font-size:13px;color:#777;margin-bottom:2rem;line-height:1.7;}
+
+/* SUCCESS MESSAGES */
+.success-msg{display:none;text-align:center;padding:2.5rem;}
+.success-msg .check{font-size:3rem;margin-bottom:1rem;}
+.success-msg h3{font-family:'Orbitron',sans-serif;font-size:1.1rem;background:linear-gradient(180deg,#fff,#C0C0C0,#808080,#C0C0C0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.5rem;}
+.success-msg p{font-size:13px;color:#777;line-height:1.7;}
+
+/* FOOTER */
+footer{padding:1.5rem 2rem;border-top:1px solid rgba(223,115,255,0.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:relative;z-index:2;}
+.fl{display:flex;align-items:center;gap:8px;cursor:pointer;}
+.fl-text{font-family:'Orbitron',sans-serif;font-size:0.85rem;letter-spacing:0.12em;color:#333;}
+.fl-text span{color:#DF73FF;}
+.fc{font-size:11px;color:#333;}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{font-size:11px;color:#444;text-decoration:none;cursor:pointer;transition:color 0.2s;}
+.footer-links a:hover{color:#DF73FF;}
+
+/* ABOUT STATS */
+.about-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(223,115,255,0.1);margin-top:3rem;}
+.about-stat{background:#050508;padding:1.2rem;text-align:center;}
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<svg class="geo-bg" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <line x1="700" y1="0" x2="700" y2="2000" stroke="rgba(223,115,255,0.1)" stroke-width="1"/>
+  <line x1="697" y1="0" x2="697" y2="2000" stroke="rgba(223,115,255,0.04)" stroke-width="1"/>
+  <line x1="703" y1="0" x2="703" y2="2000" stroke="rgba(223,115,255,0.04)" stroke-width="1"/>
+  <line x1="0" y1="900" x2="1400" y2="900" stroke="rgba(223,115,255,0.05)" stroke-width="1"/>
+  <circle cx="700" cy="900" r="12" fill="none" stroke="rgba(223,115,255,0.3)" stroke-width="1"/>
+  <circle cx="700" cy="900" r="5" fill="rgba(223,115,255,0.4)"/>
+  <circle cx="1100" cy="200" r="220" fill="none" stroke="rgba(223,115,255,0.06)" stroke-width="1"/>
+  <circle cx="1100" cy="200" r="150" fill="none" stroke="rgba(223,115,255,0.04)" stroke-width="1"/>
+  <circle cx="1100" cy="200" r="80" fill="none" stroke="rgba(223,115,255,0.08)" stroke-width="1"/>
+  <polygon points="1100,60 1190,210 1010,210" fill="none" stroke="rgba(223,115,255,0.07)" stroke-width="1"/>
+  <rect x="80" y="350" width="110" height="110" fill="none" stroke="rgba(223,115,255,0.06)" stroke-width="1" transform="rotate(15,135,405)"/>
+  <rect x="70" y="340" width="130" height="130" fill="none" stroke="rgba(223,115,255,0.03)" stroke-width="1" transform="rotate(30,135,405)"/>
+  <circle cx="150" cy="700" r="130" fill="none" stroke="rgba(130,60,200,0.06)" stroke-width="1"/>
+  <polygon points="1200,650 1260,760 1140,760" fill="none" stroke="rgba(223,115,255,0.05)" stroke-width="1"/>
+  <circle cx="200" cy="250" r="3" fill="rgba(223,115,255,0.2)"/>
+  <circle cx="1200" cy="600" r="3" fill="rgba(223,115,255,0.2)"/>
+  <circle cx="100" cy="550" r="2" fill="rgba(223,115,255,0.1)"/>
+</svg>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" onclick="showPage('home')">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <line x1="9" y1="1" x2="9" y2="17" stroke="#DF73FF" stroke-width="2.5"/>
+      <line x1="1" y1="6" x2="17" y2="6" stroke="#DF73FF" stroke-width="2.5"/>
+    </svg>
+    <div class="logo-text">ZOPHAN<span>.AI</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a onclick="scrollToSection('services')">Services</a></li>
+    <li><a onclick="scrollToSection('process')">Process</a></li>
+    <li><a onclick="showPage('pricing')">Pricing</a></li>
+    <li><a onclick="showPage('about')">About</a></li>
+    <li><a onclick="showPage('contact')">Contact</a></li>
+    <li class="free-res"><a onclick="showPage('resources')">Free Resources</a></li>
+  </ul>
+  <button class="nav-btn" onclick="showPage('contact')">Book a call</button>
+</nav>
+
+<!-- ============ HOME PAGE ============ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge"><span class="dot"></span>AI Automation Agency</div>
+    <div class="hero-layout">
+      <div>
+        <h1>Have <span class="hl">AI</span><br>Work For You<br>Before You<br>Work For <span class="hl">AI.</span></h1>
+        <div class="tagline-sub">Where Faith and Tech Meet, and Time and Freedom Abide.</div>
+        <p class="hero-sub">Save hours every week with smart flow automations built specifically for your business.</p>
+        <div class="hero-ctas">
+          <button class="btn-main" onclick="showPage('contact')">Book free call</button>
+          <button class="btn-outline" onclick="showPage('pricing')">See pricing</button>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-label">System status</div>
+        <div class="panel-stat"><div class="panel-num">10<span>hrs+</span></div><div class="panel-desc">Saved weekly</div></div>
+        <div class="panel-stat"><div class="panel-num">24<span>/7</span></div><div class="panel-desc">AI always on</div></div>
+        <div class="panel-stat"><div class="panel-num">100<span>%</span></div><div class="panel-desc">Small biz focused</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-item"><div class="trust-num">[<span>X</span>]</div><div class="trust-label">Clients Served</div></div>
+    <div class="trust-item"><div class="trust-num">[<span>X</span>]</div><div class="trust-label">Hours Saved</div></div>
+    <div class="trust-item"><div class="trust-num">14<span>days</span></div><div class="trust-label">Avg Go Live</div></div>
+    <div class="trust-item"><div class="trust-num">24<span>/7</span></div><div class="trust-label">AI Working</div></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PROBLEM / SOLUTION -->
+  <div class="problem-section">
+    <div style="text-align:center;margin-bottom:2rem;">
+      <div class="stag" style="text-align:center">Sound familiar?</div>
+      <div class="stitle" style="text-align:center;-webkit-text-fill-color:transparent;background:linear-gradient(180deg,#fff 0%,#C0C0C0 40%,#707070 60%,#C0C0C0 100%);-webkit-background-clip:text;background-clip:text;font-family:'Orbitron',sans-serif;font-size:clamp(1.3rem,3.5vw,2rem);font-weight:700;letter-spacing:0.04em;line-height:1.1;margin:0 auto 0.8rem;">Does this sound like your business?</div>
+    </div>
+    <div class="problem-grid">
+      <div>
+        <div style="font-size:9px;color:#666;letter-spacing:0.15em;text-transform:uppercase;font-family:'Orbitron',sans-serif;margin-bottom:1rem;">😤 Without ZOPHAN</div>
+        <ul class="problem-list">
+          <li>Missing calls and losing leads overnight</li>
+          <li>Hours wasted on scheduling back and forth</li>
+          <li>Chasing reviews manually after every job</li>
+          <li>Following up with leads too late or not at all</li>
+          <li>Doing admin work instead of growing</li>
+          <li>No idea where your leads are coming from</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:9px;color:#DF73FF;letter-spacing:0.15em;text-transform:uppercase;font-family:'Orbitron',sans-serif;margin-bottom:1rem;">✨ With ZOPHAN</div>
+        <ul class="solution-list">
+          <li>Every missed call gets an instant text back</li>
+          <li>Clients book themselves automatically</li>
+          <li>Reviews requested after every job automatically</li>
+          <li>AI follows up with leads in seconds</li>
+          <li>Your business runs while you focus on growth</li>
+          <li>Clear dashboard showing all your numbers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="section" id="services">
+    <div class="stag">What we build</div>
+    <div class="stitle">Stop doing it manually.</div>
+    <div class="ssub">We find the tasks eating your time and replace them with AI systems that run without you.</div>
+    <div class="svc-grid">
+      <div class="svc"><div class="svc-icon">⚡</div><div class="svc-name">Flow Automation</div><div class="svc-desc">Replace repetitive tasks with intelligent workflows running 24/7 on autopilot.</div></div>
+      <div class="svc"><div class="svc-icon">💬</div><div class="svc-name">AI Chatbots</div><div class="svc-desc">Capture leads, answer questions and book jobs while you sleep.</div></div>
+      <div class="svc"><div class="svc-icon">🌐</div><div class="svc-name">Website Design</div><div class="svc-desc">Professional websites built to convert visitors into paying clients.</div></div>
+      <div class="svc"><div class="svc-icon">⭐</div><div class="svc-name">Review Automation</div><div class="svc-desc">Auto-request and respond to Google reviews to build your reputation.</div></div>
+      <div class="svc"><div class="svc-icon">📅</div><div class="svc-name">Booking Systems</div><div class="svc-desc">Let clients book, reschedule and get reminders without you touching anything.</div></div>
+      <div class="svc"><div class="svc-icon">📣</div><div class="svc-name">Lead Follow-Up</div><div class="svc-desc">Instant AI responses to new leads so you never lose a hot prospect again.</div></div>
+    </div>
+  </div>
+
+  <!-- PROCESS -->
+  <div class="section" id="process">
+    <div class="stag">The process</div>
+    <div class="stitle">Simple steps.<br>Real results.</div>
+    <div class="steps">
+      <div class="step"><div class="step-n">01</div><div class="step-t">Audit your workflow</div><div class="step-d">Find what's eating your time and costing you money.</div></div>
+      <div class="step"><div class="step-n">02</div><div class="step-t">Build the system</div><div class="step-d">Custom AI automations built for your specific business.</div></div>
+      <div class="step"><div class="step-n">03</div><div class="step-t">Live in 14 days</div><div class="step-d">Your automations go live within 2 weeks guaranteed.</div></div>
+      <div class="step"><div class="step-n">04</div><div class="step-t">You get time back</div><div class="step-d">AI handles the busy work while you focus on growth.</div></div>
+      <div class="step"><div class="step-n">05</div><div class="step-t">We keep it running</div><div class="step-d">Ongoing support so it never stops working for you.</div></div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="section">
+    <div class="stag">Results</div>
+    <div class="stitle">What clients say.</div>
+    <div class="ssub">Real businesses. Real results. Real time saved.</div>
+    <div class="test-grid">
+      <div class="test-card"><div class="test-quote">"</div><div class="test-text">Your first testimonial goes here. Even one powerful client story changes everything about how visitors see you.</div><div class="test-author">[Client Name]</div><div class="test-biz">[Business Type] — [City, OH]</div></div>
+      <div class="test-card"><div class="test-quote">"</div><div class="test-text">Focus on hours saved, leads captured, or revenue gained. Specific numbers make the biggest impact.</div><div class="test-author">[Client Name]</div><div class="test-biz">[Business Type] — [City, OH]</div></div>
+      <div class="test-card"><div class="test-quote">"</div><div class="test-text">"Saved me 12 hours a week" is worth more than any marketing copy you could ever write on a page.</div><div class="test-author">[Client Name]</div><div class="test-biz">[Business Type] — [City, OH]</div></div>
+    </div>
+  </div>
+
+  <!-- FOUNDER -->
+  <div class="section" style="background:rgba(223,115,255,0.02);">
+    <div class="stag">Who we are</div>
+    <div class="stitle" style="margin-bottom:2rem">Faith meets technology.</div>
+    <div class="founder-layout">
+      <div class="founder-photo">
+        <div class="founder-placeholder">
+          <div class="icon">👤</div>
+          <p>Your photo<br>goes here</p>
+        </div>
+      </div>
+      <div>
+        <div class="founder-name">[Your Name]</div>
+        <div class="founder-title">Founder — ZOPHAN AI Automation</div>
+        <p class="founder-bio">Your story goes here. Be real — people hire people they trust, not just companies. Tell them who you are, why you started ZOPHAN, and what drives you.</p>
+        <p class="founder-bio">As a small business owner myself, I know firsthand how much time gets lost to tasks that have nothing to do with why you started your business. ZOPHAN exists to give that time back — so you can keep the main things the main things. God, family, your neighbor.</p>
+        <div class="value-tags">
+          <div class="value-tag">Faith</div>
+          <div class="value-tag">Integrity</div>
+          <div class="value-tag">Hustle</div>
+          <div class="value-tag">Results</div>
+          <div class="value-tag">Community</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING PREVIEW -->
+  <div class="section">
+    <div class="stag">Transparent pricing</div>
+    <div class="stitle">No surprises.<br>Just results.</div>
+    <div class="ssub">We show our prices because we respect your time. No "book a demo just to see a number."</div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">🥉 Starter</div>
+        <div class="price-setup">$297 <span>setup</span></div>
+        <div class="price-monthly">+ $97/month</div>
+        <ul class="price-features">
+          <li>AI chatbot on website</li>
+          <li>Missed call text-back</li>
+          <li>Lead capture form</li>
+          <li>Monthly check-in</li>
+        </ul>
+        <button class="price-btn" onclick="showPage('contact')">Get started</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tier">🥈 Growth</div>
+        <div class="price-setup">$597 <span>setup</span></div>
+        <div class="price-monthly">+ $197/month</div>
+        <ul class="price-features">
+          <li>Everything in Starter</li>
+          <li>Review automation</li>
+          <li>Booking system</li>
+          <li>Follow-up sequences</li>
+        </ul>
+        <button class="price-btn" onclick="showPage('contact')">Get started</button>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">🥇 Pro</div>
+        <div class="price-setup">$997 <span>setup</span></div>
+        <div class="price-monthly">+ $397/month</div>
+        <ul class="price-features">
+          <li>Everything in Growth</li>
+          <li>Full workflow audit</li>
+          <li>Custom automations</li>
+          <li>Monthly reports</li>
+        </ul>
+        <button class="price-btn" onclick="showPage('contact')">Get started</button>
+      </div>
+      <div class="price-card custom">
+        <div class="price-tier">🏢 Custom</div>
+        <div class="price-setup">Custom <span>quote</span></div>
+        <div class="price-monthly">Scoped per project</div>
+        <ul class="price-features">
+          <li>Multiple locations</li>
+          <li>Software integration</li>
+          <li>Complex workflows</li>
+          <li>Enterprise builds</li>
+        </ul>
+        <button class="price-btn" onclick="showPage('contact')">Schedule consult</button>
+      </div>
+    </div>
+    <p class="price-note">Starting ranges — exact quote discussed on your free strategy call. No pressure, no obligation.</p>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="cta-band">
+    <div class="cta-box">
+      <h2>Ready to put your business<br>on <span>autopilot?</span></h2>
+      <p>Book a free 30-minute strategy call. We'll show you exactly what can be automated and what it would save you every week.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn-main" onclick="showPage('contact')">Book free call</button>
+        <button class="btn-outline" onclick="showPage('intake')">Fill intake form first</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end home -->
+
+<!-- ============ PRICING PAGE ============ -->
+<div id="page-pricing" class="page">
+  <div class="section">
+    <div class="stag">Transparent pricing</div>
+    <div class="stitle">No surprises.<br>Just results.</div>
+    <div class="ssub">We show our prices because we respect your time. Every package includes setup and ongoing support. No hidden fees ever.</div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">🥉 Starter</div>
+        <div class="price-setup">$297 <span>setup</span></div>
+        <div class="price-monthly">+ $97/month</div>
+        <ul class="price-features">
+          <li>AI chatbot on website</li>
+          <li>Missed call text-back</li>
+          <li>Lead capture form</li>
+          <li>Email notifications</li>
+          <li>Monthly check-in call</li>
+        </ul>
+        <button class="price-btn" onclick="showPage('contact')">Get started</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tier">🥈 Growth</div>
+        <div class="price-setup">$597 <span>setup</span></div>
+        <div class="price-monthly">+ $197/month</div>
+        <ul class="price-features">
+          <li>Everything in Starter</li>
+          <li>Review automation</li>
+          <li>Appointment booking</li>
+          <li>Follow-up sequences</li>
+          <li>Bi-weekly optimization</li>
+        </ul>
+        <button class="price-btn" onclick="showPage('contact')">Get started</button>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">🥇 Pro</div>
+        <div class="price-setup">$997 <span>setup</span></div>
+        <div class="price-monthly">+ $397/month</div>
+        <ul class="price-features">
+          <li>Everything in Growth</li>
+          <li>Full workflow audit</li>
+          <li>Custom automations</li>
+          <li>Social media automation</li>
+          <li>Monthly performance reports</li>
+          <li>Priority support</li>
+        </ul>
+        <button class="price-btn" onclick="showPage('contact')">Get started</button>
+      </div>
+      <div class="price-card custom">
+        <div class="price-tier">🏢 Custom</div>
+        <div class="price-setup">Custom <span>quote</span></div>
+        <div class="price-monthly">Scoped per project</div>
+        <ul class="price-features">
+          <li>Multiple locations</li>
+          <li>Existing software integration</li>
+          <li>Complex custom workflows</li>
+          <li>Dedicated support</li>
+          <li>Custom reporting dashboard</li>
+          <li>Enterprise level builds</li>
+        </ul>
+        <button class="price-btn" onclick="showPage('contact')">Schedule consultation</button>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">🌐 Website Add-on</div>
+        <div class="price-setup">$500 <span>one-time</span></div>
+        <div class="price-monthly">Add to any package</div>
+        <ul class="price-features">
+          <li>Professional design</li>
+          <li>Mobile responsive</li>
+          <li>Contact &amp; lead forms</li>
+          <li>Live in days</li>
+          <li>Connected to your automations</li>
+        </ul>
+        <button class="price-btn" onclick="showPage('contact')">Add on</button>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer">
+      <div class="disclaimer-grid">
+        <div>
+          <p style="margin-top:1rem"><strong>Our standard packages are designed for small businesses</strong> — typically solo operators up to around 20 employees with straightforward workflows and no existing complex software systems.</p>
+          <br>
+          <p>If your business is larger, has multiple locations, or uses existing software that needs to be connected, the complexity goes up significantly — and so does the scope of work. In those cases we'll build you a custom quote that reflects what the job actually requires.</p>
+          <br>
+          <p>We'd rather be honest about that upfront than surprise you later. That's just how we do things at ZOPHAN.</p>
+        </div>
+        <div>
+          <p style="font-size:9px;color:#DF73FF;letter-spacing:0.15em;text-transform:uppercase;font-family:'Orbitron',sans-serif;margin-bottom:1rem;margin-top:1rem;">Which package is right for you?</p>
+          <ul class="size-guide">
+            <li><span class="tag green">Starter / Growth</span> Solo to 10 employees, simple workflows</li>
+            <li><span class="tag green">Pro</span> 10-20 employees, established business</li>
+            <li><span class="tag yellow">Pro / Custom</span> 20-50 employees, some existing tools</li>
+            <li><span class="tag red">Custom</span> 50+ employees, multiple locations, complex integrations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="price-note">Not sure where you fall? Fill out our intake form — we'll tell you exactly what we'd recommend before you commit to anything.</p>
+  </div>
+
+  <div class="cta-band">
+    <div class="cta-box">
+      <h2>Not sure which<br><span>package fits?</span></h2>
+      <p>Fill out our intake form and we'll recommend the right package before you spend a single dollar.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn-main" onclick="showPage('intake')">Fill intake form</button>
+        <button class="btn-outline" onclick="showPage('contact')">Book a call first</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ABOUT PAGE ============ -->
+<div id="page-about" class="page">
+  <div class="section">
+    <div class="stag">Our story</div>
+    <div class="stitle">Faith meets technology.</div>
+    <div class="ssub">ZOPHAN was built on the belief that small business owners deserve the same powerful tools that big companies use — at a price that actually makes sense.</div>
+    <div class="founder-layout">
+      <div class="founder-photo">
+        <div class="founder-placeholder">
+          <div class="icon">👤</div>
+          <p>Your photo<br>goes here</p>
+        </div>
+      </div>
+      <div>
+        <div class="founder-name">[Your Name]</div>
+        <div class="founder-title">Founder &amp; CEO — ZOPHAN AI Automation</div>
+        <p class="founder-bio">Your full story goes here. Be honest and personal. Tell them about your faith, your hustle, your hauling business, and why you built ZOPHAN. People connect with real stories — not polished marketing copy.</p>
+        <p class="founder-bio">I built ZOPHAN because I lived the problem. Running a small business means wearing every hat — sales, operations, admin, marketing — all at once. AI changed that for me. Now I help other small business owners experience the same freedom so they can focus on what actually matters.</p>
+        <p class="founder-bio" style="color:#DF73FF;font-style:italic;">God. Family. Your neighbor. Keep the main things the main things.</p>
+        <div class="value-tags">
+          <div class="value-tag">Faith</div>
+          <div class="value-tag">Integrity</div>
+          <div class="value-tag">Hustle</div>
+          <div class="value-tag">Results</div>
+          <div class="value-tag">Community</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-stats">
+      <div class="about-stat"><div class="trust-num">[<span>X</span>]</div><div class="trust-label">Clients Served</div></div>
+      <div class="about-stat"><div class="trust-num">[<span>X</span>]</div><div class="trust-label">Hours Saved</div></div>
+      <div class="about-stat"><div class="trust-num">[<span>X</span>]</div><div class="trust-label">Automations Built</div></div>
+      <div class="about-stat"><div class="trust-num">14<span>days</span></div><div class="trust-label">Avg Go Live</div></div>
+    </div>
+  </div>
+  <div class="cta-band">
+    <div class="cta-box">
+      <h2>Ready to work<br><span>with ZOPHAN?</span></h2>
+      <p>Let's have a real conversation about your business and what we can build together. No pitch. Just a conversation.</p>
+      <button class="btn-main" onclick="showPage('contact')">Book free strategy call</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONTACT PAGE ============ -->
+<div id="page-contact" class="page">
+  <div class="section">
+    <div class="stag">Get in touch</div>
+    <div class="stitle">Let's talk about<br>your business.</div>
+    <div class="ssub">Book a free 30-minute strategy call. No sales pressure — just a real conversation about what's possible for your business.</div>
+    <div class="contact-layout">
+      <div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div><div class="contact-label">Phone / Text</div><div class="contact-value">[Your number here]</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div><div class="contact-label">Email</div><div class="contact-value">[Your email here]</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><div class="contact-label">Location</div><div class="contact-value">Euclid, OH — Serving nationwide</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div><div class="contact-label">Response time</div><div class="contact-value">Within 24 hours</div></div>
+        </div>
+        <div style="margin-top:1.5rem;padding:1.5rem;border:1px solid rgba(223,115,255,0.15);background:rgba(223,115,255,0.03);">
+          <div class="stag" style="margin-bottom:0.5rem">Prefer to fill out a form?</div>
+          <p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:1rem;">Fill out our client intake form so we already know your pain points before we ever connect. Makes the call way more productive.</p>
+          <button class="btn-outline" onclick="showPage('intake')" style="font-size:10px;padding:9px 18px;">Fill intake form →</button>
+        </div>
+      </div>
+      <div>
+        <div id="contact-form-inner">
+          <div class="form-group"><label class="form-label">Your name *</label><input class="form-input" placeholder="First and last name"/></div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" placeholder="your@email.com"/></div>
+            <div class="form-group"><label class="form-label">Phone</label><input class="form-input" placeholder="(000) 000-0000"/></div>
+          </div>
+          <div class="form-group"><label class="form-label">Business name</label><input class="form-input" placeholder="Your business name"/></div>
+          <div class="form-group"><label class="form-label">Business size</label>
+            <select class="form-select form-input">
+              <option>Not sure</option>
+              <option>Solo / Just me</option>
+              <option>2-10 employees</option>
+              <option>10-20 employees</option>
+              <option>20-50 employees</option>
+              <option>50+ employees / Multiple locations</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">What do you need help with?</label>
+            <select class="form-select form-input">
+              <option>Select a service...</option>
+              <option>Flow Automation</option>
+              <option>AI Chatbot</option>
+              <option>Website Design</option>
+              <option>Review Automation</option>
+              <option>Booking System</option>
+              <option>Custom / Enterprise</option>
+              <option>Not sure — let's talk</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Biggest challenge right now</label><textarea class="form-textarea" placeholder="What's eating most of your time right now?"></textarea></div>
+          <button class="btn-main" onclick="submitContact()" style="width:100%">Send message →</button>
+        </div>
+        <div id="contact-success" class="success-msg">
+          <div class="check">✅</div>
+          <h3>Message received!</h3>
+          <p>We'll be in touch within 24 hours to schedule your free strategy call. God bless!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FREE RESOURCES PAGE ============ -->
+<div id="page-resources" class="page">
+  <div class="section">
+    <div class="stag">Resources for Small Business Owners</div>
+    <div class="stitle">Tools to Help You<br>Get Started.</div>
+    <div class="ssub">A few things we put together that might save you some time. No strings attached.</div>
+    <div class="resources-grid">
+      <div class="resource-card coming-soon">
+        <div class="coming-badge">// Coming soon</div>
+        <div class="resource-icon">📋</div>
+        <div class="resource-tag">Free PDF Guide</div>
+        <div class="resource-title">The Small Business AI Audit</div>
+        <div class="resource-desc">A simple checklist of 10 things every small business should be automating right now — and how much time each one saves you.</div>
+        <button class="resource-btn">Download Free →</button>
+      </div>
+      <div class="resource-card coming-soon">
+        <div class="coming-badge">// Coming soon</div>
+        <div class="resource-icon">💰</div>
+        <div class="resource-tag">Free PDF Guide</div>
+        <div class="resource-title">5 Ways Your Business Is Losing Money Without Knowing It</div>
+        <div class="resource-desc">The hidden time and money leaks most small business owners don't even realize they have — and exactly how to plug them.</div>
+        <button class="resource-btn">Download Free →</button>
+      </div>
+      <div class="resource-card coming-soon">
+        <div class="coming-badge">// Coming soon</div>
+        <div class="resource-icon">🚀</div>
+        <div class="resource-tag">Free PDF Guide</div>
+        <div class="resource-title">The 14-Day Automation Jumpstart</div>
+        <div class="resource-desc">What to automate first, why, and in what order — a step by step guide to getting your first automation live in 2 weeks.</div>
+        <button class="resource-btn">Download Free →</button>
+      </div>
+      <div class="resource-card coming-soon">
+        <div class="coming-badge">// Coming soon</div>
+        <div class="resource-icon">📞</div>
+        <div class="resource-tag">Free PDF Guide</div>
+        <div class="resource-title">How to Never Miss a Lead Again</div>
+        <div class="resource-desc">The exact missed call and follow-up automation system that turns lost leads into booked jobs — completely automatically.</div>
+        <button class="resource-btn">Download Free →</button>
+      </div>
+    </div>
+    <div class="email-capture">
+      <h3>Want to know when<br>these drop?</h3>
+      <p>Leave your email and we'll send each guide straight to your inbox when it's ready. That's it — no spam, no pitch, no pressure.</p>
+      <div id="email-form-inner">
+        <div class="email-row">
+          <input type="email" placeholder="your@email.com"/>
+          <button class="btn-main" onclick="submitEmail()">Notify me →</button>
+        </div>
+      </div>
+      <div id="email-success" class="success-msg" style="padding:1rem;">
+        <div class="check">✅</div>
+        <p>You're on the list. We'll reach out when the guides are ready. God bless!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ INTAKE FORM PAGE ============ -->
+<div id="page-intake" class="page">
+  <div class="section">
+    <div class="intake-box">
+      <div class="stitle" style="margin-top:1.5rem">Client Intake Form</div>
+      <p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:1.5rem;">Help us understand your business before we connect. Answer what you can — just select "Not sure" if you don't know something. This lets us come to your call with real insights, not generic advice.</p>
+      <div id="intake-form-inner">
+
+        <div class="form-section-title">About your business</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Business name *</label><input class="form-input" placeholder="Your business name"/></div>
+          <div class="form-group"><label class="form-label">Industry / Type *</label><input class="form-input" placeholder="e.g. Salon, HVAC, Hauling, Restaurant"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Years in business</label>
+            <select class="form-select form-input">
+              <option>Not sure</option><option>Less than 1 year</option><option>1-3 years</option><option>3-5 years</option><option>5+ years</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Team size</label>
+            <select class="form-select form-input">
+              <option>Not sure</option><option>Just me</option><option>2-10 people</option><option>10-20 people</option><option>20-50 people</option><option>50+ / Multiple locations</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">Monthly revenue range</label>
+          <select class="form-select form-input">
+            <option>Not sure / Prefer not to say</option><option>Under $5K/month</option><option>$5K-$15K/month</option><option>$15K-$50K/month</option><option>$50K+/month</option>
+          </select>
+        </div>
+
+        <div class="form-section-title">Your pain points</div>
+        <div class="form-group"><label class="form-label">What tasks eat most of your time each week? *</label><textarea class="form-textarea" placeholder="e.g. answering the same questions, scheduling, following up with leads... or Not sure"></textarea></div>
+        <div class="form-group"><label class="form-label">What do you wish you could stop doing manually?</label><textarea class="form-textarea" placeholder="Be as specific as you like — or select Not sure if you're unsure"></textarea></div>
+        <div class="form-group"><label class="form-label">Tools or software you currently use</label><input class="form-input" placeholder="e.g. Google Calendar, QuickBooks, nothing yet, not sure..."/></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Calls or inquiries per week?</label>
+            <select class="form-select form-input">
+              <option>Not sure</option><option>Less than 5</option><option>5-15</option><option>15-30</option><option>30+</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">How many do you miss?</label>
+            <select class="form-select form-input">
+              <option>Not sure</option><option>Almost none</option><option>A few per week</option><option>Many — it's a real problem</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Hours per week on admin?</label>
+            <select class="form-select form-input">
+              <option>Not sure</option><option>Under 2 hours</option><option>2-5 hours</option><option>5-10 hours</option><option>10+ hours</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Current Google reviews</label>
+            <select class="form-select form-input">
+              <option>Not sure</option><option>None yet</option><option>1-10</option><option>10-50</option><option>50+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-section-title">Your goals</div>
+        <div class="form-group"><label class="form-label">What does success look like in 6 months?</label><textarea class="form-textarea" placeholder="More time? More revenue? Less stress? Not sure is completely okay."></textarea></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Tried automation before?</label>
+            <select class="form-select form-input">
+              <option>Not sure</option><option>No — completely new to this</option><option>Tried it but it didn't stick</option><option>Yes — looking to expand</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">How soon to get started?</label>
+            <select class="form-select form-input">
+              <option>Not sure</option><option>ASAP</option><option>Within 30 days</option><option>1-3 months</option><option>Just exploring for now</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">Biggest concern about using AI in your business?</label><textarea class="form-textarea" style="min-height:70px" placeholder="We want to address your real concerns upfront — nothing is a dumb question..."></textarea></div>
+
+        <div class="form-section-title">Budget &amp; how to reach you</div>
+        <div class="form-group"><label class="form-label">Monthly budget for tools and systems</label>
+          <select class="form-select form-input">
+            <option>Not sure</option><option>Under $100/month</option><option>$100-$300/month</option><option>$300-$500/month</option><option>$500+/month</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">How did you hear about ZOPHAN?</label><input class="form-input" placeholder="Google, referral, social media, not sure..."/></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Your name *</label><input class="form-input" placeholder="Your full name"/></div>
+          <div class="form-group"><label class="form-label">Your email *</label><input class="form-input" type="email" placeholder="your@email.com"/></div>
+        </div>
+        <button class="btn-main" onclick="submitIntake()" style="width:100%;margin-top:0.5rem;padding:14px;">Submit intake form →</button>
+      </div>
+
+      <div id="intake-success" class="success-msg">
+        <div class="check">✅</div>
+        <h3>Intake form received!</h3>
+        <p>We'll review your answers and reach out within 24 hours ready to have a real conversation about your business — no generic advice, just specific insight based on what you shared. God bless!</p>
+        <button class="btn-outline" onclick="showPage('home')" style="margin-top:1.5rem;font-size:10px;padding:10px 24px;">Back to home</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl" onclick="showPage('home')">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <line x1="7" y1="1" x2="7" y2="13" stroke="#DF73FF" stroke-width="2"/>
+      <line x1="1" y1="5" x2="13" y2="5" stroke="#DF73FF" stroke-width="2"/>
+    </svg>
+    <div class="fl-text">ZOPHAN<span>.AI</span></div>
+  </div>
+  <div class="footer-links">
+    <a onclick="showPage('pricing')">Pricing</a>
+    <a onclick="showPage('about')">About</a>
+    <a onclick="showPage('resources')">Free Resources</a>
+    <a onclick="showPage('intake')">Intake Form</a>
+    <a onclick="showPage('contact')">Contact</a>
+  </div>
+  <div class="fc">© 2026 ZOPHAN AI Automation. All rights reserved.</div>
+</footer>
+
+<script>
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(s => s.classList.remove('active'));
+  document.getElementById('page-' + p).classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function scrollToSection(id) {
+  showPage('home');
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+  }, 100);
+}
+
+function submitContact() {
+  document.getElementById('contact-form-inner').style.display = 'none';
+  document.getElementById('contact-success').style.display = 'block';
+}
+
+function submitIntake() {
+  document.getElementById('intake-form-inner').style.display = 'none';
+  document.getElementById('intake-success').style.display = 'block';
+}
+
+function submitEmail() {
+  document.getElementById('email-form-inner').style.display = 'none';
+  document.getElementById('email-success').style.display = 'block';
+}
+</script>
+</body>
+</html>
