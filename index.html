@@ -458,7 +458,7 @@ footer{padding:1.5rem 2rem;border-top:1px solid rgba(223,115,255,0.1);display:fl
       </div>
     </div>
     <div style="text-align:center;margin-top:1.5rem;">
-      <button class="btn-outline" onclick="showPage('pricing')">See all pricing including website services →</button>
+      <button class="btn-outline" onclick="showPageAndScroll('pricing','pricing-website-services')">See all pricing including website services →</button>
     </div>
     <p class="price-note">Starting ranges — exact quote discussed on your free strategy call. No pressure, no obligation.</p>
   </div>
@@ -487,7 +487,60 @@ footer{padding:1.5rem 2rem;border-top:1px solid rgba(223,115,255,0.1);display:fl
     <div class="ssub" style="margin-bottom:0;">We show our prices because we respect your time. No hidden fees ever.</div>
   </div>
 
-  <!-- SECTION 1: AUTOMATION PACKAGES -->
+  <!-- SECTION 1: WEBSITE SERVICES -->
+  <div id="pricing-website-services" class="section" style="padding-bottom:2.5rem;">
+    <div class="stag">Website Services</div>
+    <div class="stitle">Your site, built right.</div>
+    <div class="ssub">A professional website built fast and maintained monthly so you never have to worry about it.</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+      <div class="price-card">
+        <div class="price-tier">🖥️ Simple Website</div>
+        <div class="price-setup">$750 <span>one-time</span></div>
+        <div class="price-monthly">1–3 pages</div>
+        <ul class="price-features">
+          <li>Professional design</li>
+          <li>Mobile responsive</li>
+          <li>Contact &amp; lead forms</li>
+          <li>Live in days</li>
+        </ul>
+        <p style="font-size:10px;color:#DF73FF;font-style:italic;margin-bottom:1rem;">Monthly maintenance $250/month</p>
+        <button class="price-btn" onclick="showPage('contact')">Get a quote</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tier">🌐 Full Website</div>
+        <div class="price-setup">$1,500 <span>one-time</span></div>
+        <div class="price-monthly">4+ pages</div>
+        <ul class="price-features">
+          <li>Everything in Simple</li>
+          <li>Multiple service pages</li>
+          <li>SEO-ready structure</li>
+          <li>Gallery or portfolio</li>
+        </ul>
+        <p style="font-size:10px;color:#DF73FF;font-style:italic;margin-bottom:1rem;">Monthly maintenance $250/month</p>
+        <button class="price-btn" onclick="showPage('contact')">Get a quote</button>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">🚀 Full Site + Blog + Automations</div>
+        <div class="price-setup">$2,500 <span>– $3,500</span></div>
+        <div class="price-monthly">one-time</div>
+        <ul class="price-features">
+          <li>Everything in Full Website</li>
+          <li>Blog setup &amp; structure</li>
+          <li>Automation integrations</li>
+          <li>Lead capture flows</li>
+        </ul>
+        <p style="font-size:10px;color:#DF73FF;font-style:italic;margin-bottom:1rem;">Monthly maintenance $250/month</p>
+        <button class="price-btn" onclick="showPage('contact')">Get a quote</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUNDLE DIVIDER -->
+  <div style="text-align:center;padding:1.5rem 2rem;border-top:1px solid rgba(223,115,255,0.15);border-bottom:1px solid rgba(223,115,255,0.15);background:rgba(223,115,255,0.03);">
+    <p style="font-size:13px;color:#888;font-style:italic;margin:0;">Want both? <span style="color:#DF73FF;">Ask about bundle pricing</span> on your free strategy call.</p>
+  </div>
+
+  <!-- SECTION 2: AUTOMATION PACKAGES -->
   <div class="section" style="padding-bottom:2.5rem;">
     <div class="stag">Automation Packages</div>
     <div class="stitle">Your business on autopilot.</div>
@@ -532,59 +585,6 @@ footer{padding:1.5rem 2rem;border-top:1px solid rgba(223,115,255,0.1);display:fl
           <li>Priority support</li>
         </ul>
         <button class="price-btn" onclick="showPage('contact')">Get started</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- BUNDLE DIVIDER -->
-  <div style="text-align:center;padding:1.5rem 2rem;border-top:1px solid rgba(223,115,255,0.15);border-bottom:1px solid rgba(223,115,255,0.15);background:rgba(223,115,255,0.03);">
-    <p style="font-size:13px;color:#888;font-style:italic;margin:0;">Want both? <span style="color:#DF73FF;">Ask about bundle pricing</span> on your free strategy call.</p>
-  </div>
-
-  <!-- SECTION 2: WEBSITE SERVICES -->
-  <div class="section" style="padding-bottom:2.5rem;">
-    <div class="stag">Website Services</div>
-    <div class="stitle">Your site, built right.</div>
-    <div class="ssub">A professional website built fast and maintained monthly so you never have to worry about it.</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
-      <div class="price-card">
-        <div class="price-tier">🖥️ Simple Website</div>
-        <div class="price-setup">$750 <span>one-time</span></div>
-        <div class="price-monthly">1–3 pages</div>
-        <ul class="price-features">
-          <li>Professional design</li>
-          <li>Mobile responsive</li>
-          <li>Contact &amp; lead forms</li>
-          <li>Live in days</li>
-        </ul>
-        <p style="font-size:10px;color:#DF73FF;font-style:italic;margin-bottom:1rem;">Monthly maintenance $250/month</p>
-        <button class="price-btn" onclick="showPage('contact')">Get a quote</button>
-      </div>
-      <div class="price-card featured">
-        <div class="price-tier">🌐 Full Website</div>
-        <div class="price-setup">$1,500 <span>one-time</span></div>
-        <div class="price-monthly">4+ pages</div>
-        <ul class="price-features">
-          <li>Everything in Simple</li>
-          <li>Multiple service pages</li>
-          <li>SEO-ready structure</li>
-          <li>Gallery or portfolio</li>
-        </ul>
-        <p style="font-size:10px;color:#DF73FF;font-style:italic;margin-bottom:1rem;">Monthly maintenance $250/month</p>
-        <button class="price-btn" onclick="showPage('contact')">Get a quote</button>
-      </div>
-      <div class="price-card">
-        <div class="price-tier">🚀 Full Site + Blog + Automations</div>
-        <div class="price-setup">$2,500 <span>– $3,500</span></div>
-        <div class="price-monthly">one-time</div>
-        <ul class="price-features">
-          <li>Everything in Full Website</li>
-          <li>Blog setup &amp; structure</li>
-          <li>Automation integrations</li>
-          <li>Lead capture flows</li>
-        </ul>
-        <p style="font-size:10px;color:#DF73FF;font-style:italic;margin-bottom:1rem;">Monthly maintenance $250/month</p>
-        <button class="price-btn" onclick="showPage('contact')">Get a quote</button>
       </div>
     </div>
   </div>
@@ -931,6 +931,14 @@ function scrollToSection(id) {
   showPage('home');
   setTimeout(() => {
     const el = document.getElementById(id);
+    if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+  }, 100);
+}
+
+function showPageAndScroll(page, sectionId) {
+  showPage(page);
+  setTimeout(() => {
+    const el = document.getElementById(sectionId);
     if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
   }, 100);
 }
