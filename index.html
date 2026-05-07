@@ -512,18 +512,20 @@ footer{padding:1.5rem 2rem;border-top:1px solid rgba(223,115,255,0.1);display:fl
 
 <!-- ============ PRICING PAGE ============ -->
 <div id="page-pricing" class="page">
-  <div class="section">
+
+  <!-- PAGE HEADER -->
+  <div class="section" style="padding-bottom:2rem;border-bottom:1px solid rgba(223,115,255,0.15);">
     <div class="stag">Transparent pricing</div>
     <div class="stitle">No surprises.<br>Just results.</div>
-    <div class="ssub">We show our prices because we respect your time. Every package includes setup and ongoing support. No hidden fees ever.</div>
+    <div class="ssub" style="margin-bottom:0;">We show our prices because we respect your time. No hidden fees ever.</div>
+  </div>
 
-    <!-- AUTOMATION PACKAGES -->
-    <div style="margin-top:2.5rem;">
-      <div class="stag">Automation Packages</div>
-      <div class="stitle" style="font-size:clamp(1rem,2.5vw,1.4rem);margin-bottom:0.5rem;">Your business on autopilot.</div>
-      <div class="ssub" style="margin-bottom:1.5rem;">AI systems that run your business behind the scenes 24/7.</div>
-    </div>
-    <div class="pricing-grid">
+  <!-- SECTION 1: AUTOMATION PACKAGES -->
+  <div class="section" style="padding-bottom:2.5rem;">
+    <div class="stag">Automation Packages</div>
+    <div class="stitle">Your business on autopilot.</div>
+    <div class="ssub">AI systems that run your business behind the scenes 24/7.</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
       <div class="price-card">
         <div class="price-tier">🥉 Starter</div>
         <div class="price-setup">$297 <span>setup</span></div>
@@ -564,32 +566,20 @@ footer{padding:1.5rem 2rem;border-top:1px solid rgba(223,115,255,0.1);display:fl
         </ul>
         <button class="price-btn" onclick="showPage('contact')">Get started</button>
       </div>
-      <div class="price-card custom">
-        <div class="price-tier">🏢 Custom</div>
-        <div class="price-setup">Custom <span>quote</span></div>
-        <div class="price-monthly">Scoped per project</div>
-        <ul class="price-features">
-          <li>Multiple locations</li>
-          <li>Existing software integration</li>
-          <li>Complex custom workflows</li>
-          <li>Dedicated support</li>
-          <li>Custom reporting dashboard</li>
-          <li>Enterprise level builds</li>
-        </ul>
-        <button class="price-btn" onclick="showPage('contact')">Schedule consultation</button>
-      </div>
     </div>
+  </div>
 
-    <!-- BUNDLE NOTE -->
-    <p style="text-align:center;font-size:13px;color:#888;font-style:italic;margin:2rem 0;padding:1.2rem 2rem;border:1px solid rgba(223,115,255,0.15);background:rgba(223,115,255,0.03);">Want both? <span style="color:#DF73FF;">Ask about bundle pricing</span> on your free strategy call.</p>
+  <!-- BUNDLE DIVIDER -->
+  <div style="text-align:center;padding:1.5rem 2rem;border-top:1px solid rgba(223,115,255,0.15);border-bottom:1px solid rgba(223,115,255,0.15);background:rgba(223,115,255,0.03);">
+    <p style="font-size:13px;color:#888;font-style:italic;margin:0;">Want both? <span style="color:#DF73FF;">Ask about bundle pricing</span> on your free strategy call.</p>
+  </div>
 
-    <!-- WEBSITE SERVICES -->
-    <div style="margin-bottom:0.8rem;">
-      <div class="stag">Website Services</div>
-      <div class="stitle" style="font-size:clamp(1rem,2.5vw,1.4rem);margin-bottom:0.5rem;">Your site, built right.</div>
-      <div class="ssub" style="margin-bottom:1.5rem;">A professional website built fast and maintained monthly so you never have to worry about it.</div>
-    </div>
-    <div class="pricing-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+  <!-- SECTION 2: WEBSITE SERVICES -->
+  <div class="section" style="padding-bottom:2.5rem;">
+    <div class="stag">Website Services</div>
+    <div class="stitle">Your site, built right.</div>
+    <div class="ssub">A professional website built fast and maintained monthly so you never have to worry about it.</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
       <div class="price-card">
         <div class="price-tier">🖥️ Simple Website</div>
         <div class="price-setup">$750 <span>one-time</span></div>
@@ -630,8 +620,10 @@ footer{padding:1.5rem 2rem;border-top:1px solid rgba(223,115,255,0.1);display:fl
         <button class="price-btn" onclick="showPage('contact')">Get a quote</button>
       </div>
     </div>
+  </div>
 
-    <!-- DISCLAIMER -->
+  <!-- DISCLAIMER + NOTES -->
+  <div class="section" style="padding-top:0;">
     <div class="disclaimer">
       <div class="disclaimer-grid">
         <div>
