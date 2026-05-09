@@ -1082,6 +1082,20 @@ function submitContact() {
 }
 
 function submitIntake() {
+  const form = document.getElementById('intake-form-inner');
+  const data = {};
+  form.querySelectorAll('.form-group').forEach(function(group) {
+    const label = group.querySelector('.form-label');
+    const input = group.querySelector('input, select, textarea');
+    if (label && input) {
+      data[label.textContent.trim()] = input.value;
+    }
+  });
+  fetch('https://nature-sandy-nicotine.ngrok-free.dev/webhook/zophan-intake', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
   document.getElementById('intake-form-inner').style.display = 'none';
   document.getElementById('intake-success').style.display = 'block';
 }
