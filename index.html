@@ -1093,6 +1093,7 @@ function submitIntake() {
   });
   fetch('https://nature-sandy-nicotine.ngrok-free.dev/webhook/zophan-intake', {
     method: 'POST',
+    mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   });
